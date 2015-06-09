@@ -34,16 +34,12 @@
 
                                     <div class="entry-content notopmargin">
 
-                                        <p>${post.content}</p>
-
-                                        <div class="tagcloud clearfix bottommargin">
-                                            <a href="#">tag</a>
-                                            <a href="#">tag</a>
-                                        </div>
+                                        <blockquote><p>${post.content}</p></blockquote>
 
                                         <c:if test="${post.user.username == pageContext.request.userPrincipal.name}">
                                             <div>
                                                 <a href="/posts/${post.id}/delete">Delete Post</a>
+                                                <a href="/posts/${post.id}/edit">Edit Post</a>
                                             </div>
                                         </c:if>
 
@@ -100,25 +96,6 @@
                                                 </div>
                                             </div>
                                         </c:forEach>
-                                    </div>
-
-                                </div>
-
-                                <div class="widget clearfix">
-
-                                    <h4>Tag Cloud</h4>
-
-                                    <div class="tagcloud">
-                                        <a href="#">general</a>
-                                        <a href="#">videos</a>
-                                        <a href="#">music</a>
-                                        <a href="#">media</a>
-                                        <a href="#">photography</a>
-                                        <a href="#">parallax</a>
-                                        <a href="#">ecommerce</a>
-                                        <a href="#">terms</a>
-                                        <a href="#">coupons</a>
-                                        <a href="#">modern</a>
                                     </div>
 
                                 </div>

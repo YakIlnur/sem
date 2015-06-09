@@ -10,5 +10,6 @@ public interface IPostRepository {
     public List<Post> findAllWithUsername(String username);
     public void addPost(Post post, String username, java.sql.Date sqlDate);
     public void deletePost(long id);
+    public void updatePost(Post post, String username, java.sql.Date sqlDate);
 
 }

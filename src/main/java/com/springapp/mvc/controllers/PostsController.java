@@ -26,6 +26,13 @@ public class PostsController {
         return "notfound";
     }
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index(ModelMap map) {
+        List<Post> posts = postRepository.findAll();
+        map.put("posts", posts);
+        return "posts/index";
+    }
+
     @RequestMapping(value = "/posts/{id:[1-9]+[0-9]*}", method = RequestMethod.GET)
     public String show(ModelMap map, @PathVariable long id) {
         //if (id == 0) throw new ResourceNotFoundException();
@@ -37,19 +44,39 @@ public class PostsController {
         return "posts/show";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/posts/{id:[1-9]+[0-9]*}/delete", method = RequestMethod.GET)
     public ModelAndView delete(@PathVariable long id){
         postRepository.deletePost(id);
         return new ModelAndView("redirect:/");
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(ModelMap map) {
-        List<Post> posts = postRepository.findAll();
-        map.put("posts", posts);
-        return "posts/index";
+    @PreAuthorize("isAuthenticated()")
+    @RequestMapping(value = "/posts/{id:[1-9]+[0-9]*}/edit", method = RequestMethod.GET)
+    public ModelAndView edit(@PathVariable long id){
+        ModelAndView modelAndView = new ModelAndView("posts/edit");
+        Post post = postRepository.find(id);
+        modelAndView.addObject("post", post);
+        return modelAndView;
     }
 
+    @PreAuthorize("isAuthenticated()")
+    @RequestMapping(value = "/posts/{id:[1-9]+[0-9]*}/edit", method = RequestMethod.POST)
+    public ModelAndView updatePost(@ModelAttribute("post")Post post){
+        User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = user.getUsername();
+
+        //получение даты и преобразование ее в sql.date
+        Calendar c1 = Calendar.getInstance();
+        java.util.Date date1 = c1.getTime();
+        java.sql.Date sqlDate = new java.sql.Date(date1.getTime());
+
+        postRepository.updatePost(post, username, sqlDate);
+
+        return new ModelAndView("redirect:/");
+    }
+
+    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/posts/new", method = RequestMethod.GET)
     public ModelAndView addNewPost() {
         ModelAndView modelAndView = new ModelAndView("posts/new");
@@ -58,6 +85,7 @@ public class PostsController {
         return modelAndView;
     }
 
+    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/post/new", method = RequestMethod.POST)
     public ModelAndView savePost(@ModelAttribute("post1")Post post){
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();

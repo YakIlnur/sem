@@ -14,7 +14,6 @@
             <ul class="entry-meta clearfix">
                 <li><i class="icon-calendar3"></i> ${post.data}</li>
                 <li><a href="#"><i class="icon-user"></i>${post.user.username}</a></li>
-                <li><i class="icon-folder-open"></i> <a href="#">Tag</a>, <a href="#">Tag</a></li>
                 <li><a href="#"><i class="icon-camera-retro"></i></a></li>
             </ul>
             <div class="entry-content">

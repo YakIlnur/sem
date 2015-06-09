@@ -111,7 +111,6 @@ public class AdminController {
     public ModelAndView redirect() {
         return new ModelAndView("redirect:/");
     }
-    //@Secured("ROLE_ADMIN")
 
     @RequestMapping(value = "/ajax", method = RequestMethod.POST)
     public @ResponseBody

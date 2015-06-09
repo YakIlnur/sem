@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -132,6 +133,13 @@ public class PostRepository implements IPostRepository {
     public void deletePost(long id) {
         String sql = "DELETE FROM posts WHERE id = ?";
         jdbcTemplate.update(sql,id);
+    }
+
+    @Override
+    public void updatePost(Post post, String username, Date sqlDate) {
+//        String s = "update posts set title = " + title + ", content = " + content + " where id = " + post_id + " ";
+        String sql = "UPDATE posts SET title = ?, content = ?, username = ?, data = ? WHERE id = ?";
+        jdbcTemplate.update(sql,post.getTitle(),post.getContent(),username,sqlDate,post.getId());
     }
 
 }
