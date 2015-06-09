@@ -17,7 +17,8 @@
                                 ${msg}
                             </c:if>
 
-                            <form id="login-form" class="nobottommargin" name='loginForm' action="/sign_in" method='POST'>
+                            <c:url var="sign_in"  value="/sign_in" />
+                            <form id="login-form" class="nobottommargin" name='loginForm' action="${sign_in}" method='POST'>
 
                                 <h3>Login to your Account</h3>
 

@@ -38,8 +38,10 @@
 
                                         <c:if test="${post.user.username == pageContext.request.userPrincipal.name}">
                                             <div>
-                                                <a href="/posts/${post.id}/delete">Delete Post</a>
-                                                <a href="/posts/${post.id}/edit">Edit Post</a>
+                                                <%--<a href="/posts/${post.id}/delete">Delete Post</a>--%>
+                                                <a href="<c:url value="/posts/${post.id}/delete"/>" class="btn btn-danger">Delete Post</a>
+                                                <%--<a href="/posts/${post.id}/edit">Edit Post</a>--%>
+                                                <a href="<c:url value="/posts/${post.id}/edit"/>" class="btn btn-success">Edit Post</a>
                                             </div>
                                         </c:if>
 
@@ -84,11 +86,12 @@
                                         <c:forEach items="${posts}" var="p">
                                             <div class="spost clearfix">
                                                 <div class="entry-image">
-                                                    <a href=${p.id} class="nobg"><img src="/resources/images/2.jpg" alt=""></a>
+                                                    <a href="<c:url value="/posts/${p.id}"/>" class="nobg"><img src="/resources/images/2.jpg" alt=""></a>
                                                 </div>
                                                 <div class="entry-c">
                                                     <div class="entry-title">
-                                                        <h4><a href=${p.id}>${p.title}</a></h4>
+                                                        <%--<h4><a href="/posts/${p.id}">${p.title}</a></h4>--%>
+                                                        <h4><a href="<c:url value="/posts/${p.id}"/>">${p.title}</a></h4>
                                                     </div>
                                                     <ul class="entry-meta">
                                                         <li>${p.data}</li>

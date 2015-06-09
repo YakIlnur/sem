@@ -23,14 +23,15 @@ public class UsersController {
     @Autowired
     private UserService userService;
 
-   @RequestMapping(value = "/{username}", method = RequestMethod.GET)
-    public String show(ModelMap map, @PathVariable String username){
+    @PreAuthorize(value = "hasRole('ROLE_ADMIN')")
+    @RequestMapping(value = "/{username}", method = RequestMethod.GET)
+    public String show(ModelMap map, @PathVariable String username) {
         User user = userRepository.findByUsername(username);
         map.put("username", user.getUsername());
         return "users/show";
     }
 
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize(value = "hasRole('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.GET)
     public String listContacts(Map<String, Object> map) {
 

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <t:applicationLayout title="Edit post">
@@ -11,7 +12,9 @@
                         <div class="panel-body" style="padding: 40px;">
                             <h1>Edit post</h1>
 
-                            <form:form id="new-post-form" class="nobottommargin" method="POST" commandName="post" action="/posts/${post.id}/edit">
+                            <%--<form:form id="new-post-form" class="nobottommargin" method="POST" commandName="post" action="/posts/${post.id}/edit">--%>
+                            <c:url var="post_edit_url"  value="/posts/${post.id}/edit" />
+                            <form:form id="new-post-form" class="nobottommargin" method="POST" commandName="post" action="${post_edit_url}">
 
                                 <div class="col_full">
                                     <label class="control-label" for="post_id"></label>

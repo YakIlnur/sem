@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <t:applicationLayout title="New post">
     <div class="container clearfix">
@@ -11,7 +12,8 @@
                         <div class="panel-body" style="padding: 40px;">
                             <h1>New post</h1>
 
-                                <form:form id="new-post-form" class="nobottommargin" method="POST" commandName="post1" action="/post/new">
+                                <c:url var="new_post_url"  value="/post/new" />
+                                <form:form id="new-post-form" class="nobottommargin" method="POST" commandName="post1" action="${new_post_url}">
 
                                     <div class="col_full">
                                         <label class="control-label" for="post_title">Title</label>

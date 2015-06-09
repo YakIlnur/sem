@@ -15,7 +15,8 @@
 
                             <h3>Register for an Account</h3>
 
-                            <form:form id="register-form" name="register-form" class="nobottommargin" method="POST" modelAttribute="user" action="/saveUser">
+                            <c:url var="sign_up"  value="/saveUser" />
+                            <form:form id="register-form" name="register-form" class="nobottommargin" method="POST" modelAttribute="user" action="${sign_up}">
 
                                 <div class="col_full">
                                     <label for="register-form-username">Choose a Username:</label>

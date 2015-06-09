@@ -1,49 +1,40 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page session="true" %>
-<html>
-<head>
-    <title>Admin_Page</title>
-    <link rel="stylesheet" href="/resources/css/bootstrap.css">
-</head>
-<body>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-
-<div class="row">
-    <div class="col-md-6">
-        <div class="col-md-6"><h3>Users</h3></div>
-        <br/>
-        ${searchUserResult}
-        <br/>
-        <table class="table table-hover">
-            <th>Delete</th>
+<t:applicationLayout title="Admin Page">
+    <div class="row">
+        <div class="col-md-6">
             <c:forEach var="user" items="${listUser}" varStatus="status">
-                <tr>
-                    <td>${user.username}</td>
-                    <td>${user.password}</td>
-                    <td>${user.authority}</td>
-                    <td>
-                        <a href="/deleteUser?username=${user.username}">Delete</a>
-                    </td>
-                    <td>
-                            <form action="users/${user.username}/edit" method="get">
+                <h4>${user.username}</h4>
 
-                                <div class="col_full">
-                                    <input type="text" id="login-form-username" name="username" value="${user.username}" class="form-control" />
-                                </div>
+                <h4>${user.password}</h4>
 
-                                <div class="col_full">
-                                    <input type="text" id="login-form-role" name="role" value="" class="form-control" />
-                                </div>
+                <h4>${user.authority}</h4>
+                <%--<a href="/deleteUser?username=${user.username}">Delete</a>--%>
+                <a href="<c:url value="/deleteUser?username=${user.username}"/>">Delete</a>
 
-                                <div class="col_full nobottommargin">
-                                    <button class="button button-3d button-black nomargin" id="login-form-submit" name="login-form-submit" value="login">Edit</button>
-                                </div>
-                            </form>
-                    </td>
-                </tr>
+                <c:url var="edit_user_role"  value="users/${user.username}/edit" />
+                <form action="${edit_user_role}" method="get">
+
+                    <div class="col_full">
+                        <input type="hidden" id="login-form-username" name="username" value="${user.username}"
+                               class="form-control"/>
+                    </div>
+
+                    <div class="col_full">
+                        <input type="text" id="login-form-role" name="role" value="" class="form-control"/>
+                    </div>
+
+                    <div class="col_full nobottommargin">
+                        <button class="btn btn-info" id="login-form-submit"
+                                name="login-form-submit" value="login">Edit
+                        </button>
+                    </div>
+                </form>
+                <hr>
             </c:forEach>
-        </table>
+        </div>
     </div>
-</div>
-</body>
-</html>
+</t:applicationLayout>

@@ -10,12 +10,14 @@
 
                 <ul class="sf-js-enabled" style="touch-action: pan-y;" ;>
                     <li class="mega-menu">
-                        <a class="sf-with-ul" href="/">
+                        <%--<a class="sf-with-ul" href="/">--%>
+                        <a class="sf-with-ul" href="<c:url value="/"/>">
                             <div>Main</div>
                         </a>
                     </li>
                     <li class="mega-menu">
-                        <a class="sf-with-ul" href="/myBlog">
+                        <%--<a class="sf-with-ul" href="/myBlog">--%>
+                        <a class="sf-with-ul" href="<c:url value="/myBlog"/>">
                             <div>My Blog</div>
                         </a>
                     </li>
@@ -25,12 +27,14 @@
 
                     <ul class="sf-js-enabled" style="touch-action: pan-y;">
                         <li class="mega-menu">
-                            <a class="sf-with-ul" href="/sign_up">
+                                <%--<a class="sf-with-ul" href="/sign_up">--%>
+                            <a class="sf-with-ul" href="<c:url value="/sign_up"/>">
                                 <div>Sign up</div>
                             </a>
                         </li>
                         <li class="mega-menu">
-                            <a class="sf-with-ul" href="/sign_in">
+                                <%--<a class="sf-with-ul" href="/sign_in">--%>
+                            <a class="sf-with-ul" href="<c:url value="/sign_in"/>">
                                 <div>Sign in</div>
                             </a>
                         </li>
@@ -42,24 +46,15 @@
                     <ul class="sf-js-enabled" style="touch-action: pan-y;">
 
                         <li class="mega-menu">
-                            <a class="sf-with-ul" href="/posts/new">
+                                <%--<a class="sf-with-ul" href="/posts/new">--%>
+                            <a class="sf-with-ul" href="<c:url value="/posts/new"/>">
                                 <div>New Post</div>
                             </a>
                         </li>
 
-                        <%--<li class="mega-menu">--%>
-                            <%--<form action="/logout" method="post" id="logoutForm">--%>
-                                <%--<input type="hidden" name="${_csrf.parameterName}"--%>
-                                       <%--value="${_csrf.token}"/>--%>
-                                <%--<button type="submit" class="button button-3d button-mini button-rounded button-red">--%>
-                                        <%--&lt;%&ndash;<i class="icon-off"></i>&ndash;%&gt;--%>
-                                    <%--<div>Logout</div>--%>
-                                <%--</button>--%>
-                            <%--</form>--%>
-                        <%--</li>--%>
-
                         <li class="mega-menu">
-                            <a class="sf-with-ul" href="/logout">
+                                <%--<a class="sf-with-ul" href="/logout">--%>
+                            <a class="sf-with-ul" href="<c:url value="/logout"/>">
                                 <div>Logout</div>
                             </a>
                         </li>

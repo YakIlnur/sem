@@ -3,6 +3,7 @@ package com.springapp.mvc.controllers;
 import com.springapp.mvc.dao.IUserRepository;
 import com.springapp.mvc.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -37,29 +38,21 @@ public class AdminController {
         return model;
     }
 
+    @PreAuthorize(value = "hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "users/{username}/edit", method = RequestMethod.GET)
     public ModelAndView userEdit(HttpServletRequest request){
-        ModelAndView model = new ModelAndView();
         String username = request.getParameter("username");
         String role = request.getParameter("role");
         userRepository.editUser(username, role);
-        model.setViewName("admin");
-        return model;
+        return new ModelAndView("redirect:/admin");
     }
 
+    @PreAuthorize(value = "hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/deleteUser", method = RequestMethod.GET)
     public ModelAndView deleteUser(HttpServletRequest request) {
         String username = request.getParameter("username");
         userRepository.delete(username);
         return new ModelAndView("redirect:/admin");
-    }
-
-    @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public ModelAndView searchUser(String search) {
-        User user = userRepository.findByUsername(search);
-        ModelAndView modelAndView = new ModelAndView("admin");
-        modelAndView.addObject("searchUserResult", user.toString());
-        return modelAndView;
     }
 
     @RequestMapping(value = "/sign_in", method = RequestMethod.GET)
@@ -75,9 +68,7 @@ public class AdminController {
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public ModelAndView logout() {
-        ModelAndView model = new ModelAndView("index");
-        model.addObject("mess", "You've been logged out successfully.");
-        return model;
+        return new ModelAndView("redirect:/");
     }
 
     @RequestMapping(value = "/sign_up", method = RequestMethod.GET)
@@ -99,11 +90,9 @@ public class AdminController {
         }
 
         else {
-            ModelAndView modelAndView = new ModelAndView("index");
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.addUser(user);
-            modelAndView.addObject("home", "<a href='/'>Next</a>");
-            return modelAndView;
+            return new ModelAndView("redirect:/");
         }
     }
 
